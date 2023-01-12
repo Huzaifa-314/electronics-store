@@ -28,6 +28,9 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  
+  <!-- custom css -->
+  <link rel="stylesheet" href="assets/css/custom.css">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0

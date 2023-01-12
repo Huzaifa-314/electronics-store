@@ -27,6 +27,9 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- custom js file -->
+  <script src="assets/js/custom.js"></script>
+
 </body>
 
 </html>
