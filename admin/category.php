@@ -71,41 +71,79 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                $cateory_sql="SELECT * FROM estore_category WHERE is_parent = '0'";
+                                $category_res = mysqli_query($db,$cateory_sql);
+                                $serial=0;
+                                while($row = mysqli_fetch_assoc($category_res)){
+                                    $cat_id = $row['ID'];
+                                    $cat_name = $row['c_name'];
+                                    $cat_image = $row['c_image'];
+                                    $cat_parent = $row['is_parent'];
+                                    $cat_status = $row['c_status'];
+                                    $serial++;
+
+
+                                ?>
+                                
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
+                                    <th scope="row"><?php echo $serial; ?></th>
+                                    <td>
+                                        <img src="../assets/images/products/category/<?php echo $cat_image;?>" width="40" alt="">
+                                    </td>
+                                    <td><?php echo $cat_name;?></td>
+                                    <td>
+                                        <?php 
+                                        if($cat_status == 0){
+                                            echo '<span class="badge bg-danger">Inactive</sapn>';
+                                        }
+                                        if($cat_status == 1){
+                                            echo '<span class="badge bg-success">Active</sapn>'; 
+                                        }    
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <a href=""><i class="bi bi-pencil-square text-dark"></i></a>
+                                        <a href=""><i class="bi bi-trash text-danger"></i></a>
+                                        
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bridie Kessler</td>
-                                    <td>Developer</td>
-                                    <td>35</td>
-                                    <td>2014-12-05</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td>Finance</td>
-                                    <td>45</td>
-                                    <td>2011-08-12</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Angus Grady</td>
-                                    <td>HR</td>
-                                    <td>34</td>
-                                    <td>2012-06-11</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Raheem Lehner</td>
-                                    <td>Dynamic Division Officer</td>
-                                    <td>47</td>
-                                    <td>2011-04-19</td>
-                                </tr>
+                                <?php
+                                    $sub_cat_sql = "SELECT * FROM estore_category WHERE is_parent='$cat_id'";
+                                    $sub_cat_res = mysqli_query($db,$sub_cat_sql);
+                                    while($row = mysqli_fetch_assoc($sub_cat_res)){
+                                        $cat_id = $row['ID'];
+                                        $cat_name = $row['c_name'];
+                                        $cat_image = $row['c_image'];
+                                        $cat_status = $row['c_status'];
+                                        ?>
+                                            <tr>
+                                            <th scope="row"><?php echo '-'; ?></th>
+                                            <td>
+                                                <img src="../assets/images/products/category/<?php echo $cat_image;?>" width="55" alt="">
+                                            </td>
+                                            <td><?php echo '<i class="bi bi-arrow-return-right"> </i>'.$cat_name;?></td>
+                                            <td>
+                                                <?php 
+                                                if($cat_status == 0){
+                                                    echo '<span class="badge bg-danger">Inactive</sapn>';
+                                                }
+                                                if($cat_status == 1){
+                                                    echo '<span class="badge bg-success">Active</sapn>'; 
+                                                }    
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <a href=""><i class="bi bi-pencil-square text-dark"></i></a>
+                                                <a href=""><i class="bi bi-trash text-danger"></i></a>
+                                                
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                                
                             </tbody>
                         </table>
                         <!-- End Table with hoverable rows -->
