@@ -17,7 +17,7 @@
 
     <section class="section dashboard">
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-4">
                 <!-- add new category -->
                 <div class="card">
                     <div class="card-body">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-8">
                 <!-- all category table -->
                 <div class="card">
                     <div class="card-body">
@@ -83,15 +83,17 @@
                                     $cat_status = $row['c_status'];
                                     $serial++;
 
-
+                                    $subCat_count_sql = "SELECT COUNT(ID) as subCat_count FROM estore_category WHERE is_parent='$cat_id'";
+                                    $subCat_count_res = mysqli_query($db,$subCat_count_sql);
+                                    $subCat_count=mysqli_fetch_assoc($subCat_count_res);
                                 ?>
                                 
-                                <tr>
+                                <tr data-bs-toggle="collapse" data-bs-target="#cat<?php echo $cat_id;?>">
                                     <th scope="row"><?php echo $serial; ?></th>
                                     <td>
                                         <img src="../assets/images/products/category/<?php echo $cat_image;?>" width="40" alt="">
                                     </td>
-                                    <td><?php echo $cat_name;?></td>
+                                    <td><?php echo $cat_name.' <span class="badge bg-secondary">'.$subCat_count['subCat_count'].' <i class="bi bi-caret-down-fill"></i></sapn>';?></td>
                                     <td>
                                         <?php 
                                         if($cat_status == 0){
@@ -116,8 +118,9 @@
                                         $cat_name = $row['c_name'];
                                         $cat_image = $row['c_image'];
                                         $cat_status = $row['c_status'];
+                                        $is_parent = $row['is_parent'];
                                         ?>
-                                            <tr>
+                                            <tr id="cat<?php echo $is_parent;?>" class="table-primary collapse">
                                             <th scope="row"><?php echo '-'; ?></th>
                                             <td>
                                                 <img src="../assets/images/products/category/<?php echo $cat_image;?>" width="55" alt="">
