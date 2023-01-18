@@ -1,6 +1,6 @@
 <?php include 'include/header.php'; ?>
-
 <?php include 'include/sidebar.php'; ?>
+<?php include 'include/function.php';?>
 
 <main id="main" class="main">
 
@@ -23,30 +23,42 @@
                     <div class="card-body">
                         <h5 class="card-title">Add New Category</h5>
 
-                        <!-- No Labels Form -->
-                        <form class="row g-3">
+                        <!-- add category form -->
+                        <form class="row g-3" action="core/insert.php" method="post">
                             <div class="col-md-12">
-                                <input type="text" class="form-control" placeholder="Category Name">
+                                <label for="">Category Name</label>
+                                <input type="text" class="form-control" placeholder="Category Name" name="cat_name" >
                             </div>
                             <div class="col-md-12">
                                 <label for="">Choose your Parent Category</label>
-                                <select id="inputState" class="form-select">
-                                    <option selected="">Choose...</option>
-                                    <option>Robotics</option>
+                                <select id="inputState" class="form-select" name="is_parent">
+                                    <option selected="">No Parent Category</option>
+                                    
+                                    <?php
+                                        $cateory_sql="SELECT * FROM estore_category WHERE is_parent = '0' ORDER BY c_name ASC";
+                                        $category_res = mysqli_query($db,$cateory_sql);
+                                        $serial=0;
+                                        while($row = mysqli_fetch_assoc($category_res)){
+                                            $cat_id = $row['ID'];
+                                            $cat_name = $row['c_name'];
+                                            ?><option value="<?php echo $cat_id;?>"><?php echo $cat_name;?></option><?php
+                                        }
+                                    ?>
+                                    <!-- <option>Robotics</option>
                                     <option>Sensor</option>
                                     <option>Microcontroller</option>
                                     <option>Accessories</option>
                                     <option>Basic Components</option>
-                                    <option>Kits</option>
+                                    <option>Kits</option> -->
                                 </select>
                             </div>
                             <div class="col-md-12">
                                 <label for="">Choose category image</label>
                                 <input type="file" id="choose-file" class="form-control" name="choose-file" accept="image/*" placeholder="Choose File">
-                                <div id="img-preview"></div>
+                                <div id="img-preview" style="width: fit-content; height:fit-content;"></div>
                             </div>
                             <div class="">
-                                <button type="submit" class="btn btn-primary">Add New Category</button>
+                                <button type="submit" class="btn btn-primary" name="add_category">Add New Category</button>
                             </div>
                         </form><!-- End No Labels Form -->
 
@@ -114,24 +126,24 @@
                                     $sub_cat_sql = "SELECT * FROM estore_category WHERE is_parent='$cat_id'";
                                     $sub_cat_res = mysqli_query($db,$sub_cat_sql);
                                     while($row = mysqli_fetch_assoc($sub_cat_res)){
-                                        $cat_id = $row['ID'];
-                                        $cat_name = $row['c_name'];
-                                        $cat_image = $row['c_image'];
-                                        $cat_status = $row['c_status'];
+                                        $sub_cat_id = $row['ID'];
+                                        $sub_cat_name = $row['c_name'];
+                                        $sub_cat_image = $row['c_image'];
+                                        $sub_cat_status = $row['c_status'];
                                         $is_parent = $row['is_parent'];
                                         ?>
                                             <tr id="cat<?php echo $is_parent;?>" class="table-primary collapse">
                                             <th scope="row"><?php echo '-'; ?></th>
                                             <td>
-                                                <img src="../assets/images/products/category/<?php echo $cat_image;?>" width="55" alt="">
+                                                <img src="../assets/images/products/category/<?php echo $sub_cat_image;?>" width="55" alt="">
                                             </td>
-                                            <td><?php echo '<i class="bi bi-arrow-return-right"> </i>'.$cat_name;?></td>
+                                            <td><?php echo '<i class="bi bi-arrow-return-right"> </i>'.$sub_cat_name;?></td>
                                             <td>
                                                 <?php 
-                                                if($cat_status == 0){
+                                                if($sub_cat_status == 0){
                                                     echo '<span class="badge bg-danger">Inactive</sapn>';
                                                 }
-                                                if($cat_status == 1){
+                                                if($sub_cat_status == 1){
                                                     echo '<span class="badge bg-success">Active</sapn>'; 
                                                 }    
                                                 ?>
@@ -142,7 +154,7 @@
                                                 
                                             </td>
                                         </tr>
-                                        <?php
+                                        <?php   
                                     }
                                 }
                                 ?>
