@@ -1,12 +1,18 @@
 <?php 
+include 'connection.php';
 
-// read function
-function readstart($db,$sql){
-    $res=mysqli_query($db,$sql);
-    while($row=mysqli_fetch_assoc($res)){
-        $key = array_keys($row);
-        echo json_encode($key);
+// delete function
+function deleterec($tablename,$columname,$deleteid){
+    global $db;
+    $delete_sql="DELETE FROM `$tablename` WHERE `$columname`='$deleteid'";
+    $delete_res = mysqli_query($db,$delete_sql);
+    if($delete_res){
+        header("Location: " . $_SERVER["HTTP_REFERER"]);    
     }
+    else{
+        die('Category delete error!'.mysqli_error($db));
+    }
+
 }
 
 
