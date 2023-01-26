@@ -1,6 +1,6 @@
 <?php include 'connection.php';?>
 <?php include 'function.php'; ?>
-<?php include 'insert.php'; ?>
+<?php include 'core\insert.php'; ?>
 <?php ob_start();?>
 
 <!DOCTYPE html>
