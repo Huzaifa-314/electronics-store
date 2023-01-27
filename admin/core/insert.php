@@ -40,7 +40,7 @@ if (isset($_POST['add_category'])) {
             die('Category insert error!' . mysqli_error($db));
         }
     }
-
+}
 
     
 
@@ -54,6 +54,35 @@ if (isset($_POST['add_category'])) {
     // if($mbsize>1){
     //     $sizeErr='<div class="alert alert-danger mb-0 mt-2">Image size must less than 1 MB</div>';
     // }
+
+
+
+    // brand insert
+if(isset($_POST['add_brand'])){
+    $brand_name = $_POST['brand_name'];
+    $file_name  = $_FILES['choose-file']['name'];
+    $tmp_name   = $_FILES['choose-file']['tmp_name'];
+
+    if(!empty($file_name)){
+        $file = is_img($file_name);
+
+        if($file){
+            $updatedname = rand().$file_name;
+            move_uploaded_file($tmp_name, 'assets/img/products/brand/'.$updatedname);
+        }else{
+            echo 'not an image';
+        }
+    }else{
+        $updatedname = '';
+    }
+
+    $brandInsertSql = "INSERT INTO estore_brand (b_name, b_image, b_status) VALUES ('$brand_name', '$updatedname', '1')";
+    $brandInsertSqlResult = mysqli_query($db, $brandInsertSql);
+    if($brandInsertSqlResult){
+        header('location: brand.php');
+    }else{
+        die('Brand insert error!'.mysqli_error($db));
+    }
     
     
     $debugging="$extn";

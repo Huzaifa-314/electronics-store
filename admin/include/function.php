@@ -75,4 +75,32 @@ function deleterec($tablename,$columname,$deleteid,$header_location){
 }
 
 
+function is_img($file_name){
+    global $db;
+
+    $splitedArray = explode('.', $file_name);
+    $extn = strtolower(end($splitedArray));
+
+    $extentions = array('png', 'jpg', 'jpeg');
+
+    if(in_array($extn, $extentions) === true){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+// delete file
+function delete_file($file_name,$table,$key,$file_id,$path){
+    global $db;
+
+    $file_name_res = mysqli_query($db,"SELECT $file_name FROM $table WHERE $key = '$file_id'");
+    $row = mysqli_fetch_assoc($file_name_res);
+    $f_name = $row[$file_name];
+
+    unlink($path.$f_name);
+}
+
+
 ?>
