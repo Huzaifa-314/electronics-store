@@ -90,6 +90,29 @@ function is_img($file_name){
     }
 }
 
+function is_img_array($file_name){
+    global $db;
+    $all_is_image = true;
+
+    for($i=0;$i<count($file_name);$i++){
+        $splitedArray = explode('.', $file_name[$i]);
+    $extn = strtolower(end($splitedArray));
+
+    $extentions = array('png', 'jpg', 'jpeg');
+
+    if(in_array($extn, $extentions) === true){
+    }else{
+        $all_is_image=false;
+        break;
+    }
+    }
+    if($all_is_image){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 // delete file
 function delete_file($file_name,$table,$key,$file_id,$path){

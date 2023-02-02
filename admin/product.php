@@ -215,8 +215,8 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="">Choose Gallery image</label>
-                                    <input type="file" id="choose-multi-file" class="form-control" name="files" accept="image/*" placeholder="Choose File" multiple>
-                                    <?php echo $imgErr; ?>
+                                    <input type="file" id="choose-multi-file" class="form-control" name="gallery[]" accept="image/*" placeholder="Choose File" multiple>
+                                    <?php echo $p_gallery_image_err; ?>
                                     <div id="multi-img-preview" style="width: fit-content; height:fit-content;"></div>
                                 </div>
                                 <div class="">

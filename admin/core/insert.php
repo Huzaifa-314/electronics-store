@@ -7,6 +7,7 @@ $nameErr = "";
 $debugging="debug log::";
 $imgErr="";
 $p_featured_img_err="";
+$p_gallery_image_err="";
 if (isset($_POST['add_category'])) {
     $name = $_POST['cat_name'];
     $is_parent = $_POST['is_parent'];
@@ -104,24 +105,45 @@ if(isset($_POST['add_product'])){
     $p_sub_category = $_POST['p_sub_category'];
     $file_name= $_FILES['choose-file']['name'];
     $tmp_path = $_FILES['choose-file']['tmp_name'];
-    //$_FILES['files']['name'];
+    $gallery = array_filter($_FILES['gallery']['name']);
+    $gallery_tmp_path = array_filter($_FILES['gallery']['tmp_name']);
+    $gallery_images_names_for_database = "";
 
-    $file = is_img($file_name);
-
-    if($file){
-        $updatedname = rand().$file_name;
-        move_uploaded_file($tmp_path, 'assets/img/products/'.$updatedname);
+    if(!empty($gallery)){
+        $gallery_images_names_for_database="";
+        if(is_img_array($gallery)){
+            //upload the gallery images to the server
+            for($i=0;$i<count($gallery);$i++){
+                $updated_gallery_image_name= rand().$gallery[$i];
+                move_uploaded_file($gallery_tmp_path[$i],'assets/img/products/gallery/'.$updated_gallery_image_name);
+                $gallery_images_names_for_database.='@'.$updated_gallery_image_name;
+            }
+        }else{
+            $p_gallery_image_err='<div class="alert alert-danger mb-0 mt-2">All the image should be png, jpg or jpeg file</div>';
+        }
     }else{
-        $p_featured_img_err='<div class="alert alert-danger mb-0 mt-2">Please upload png, jpg or jpeg file</div>';
+        //set the value(that has to be sent in the database) to null
     }
 
-    $pInsertSql = "INSERT INTO estore_product (p_name, p_category, p_brand,p_reg_price,p_sale_price,p_featured_img,p_short_desc,p_big_desc,p_quantity,p_status) VALUES ('$p_name', '$p_sub_category', '$p_brand','$regular_price','$offer_price','$updatedname','$p_small_desc','$p_big_desc','$stock','1')";
-    $pInsertSqlResult = mysqli_query($db, $pInsertSql);
-    if($pInsertSqlResult){
-        header('location: product.php?data=view');
+    if(!empty($file_name)){
+        if(is_img($file_name)){
+            $updatedname = rand().$file_name;
+            move_uploaded_file($tmp_path, 'assets/img/products/'.$updatedname);
+            $pInsertSql = "INSERT INTO estore_product (p_name, p_category, p_brand,p_reg_price,p_sale_price,p_featured_img,p_galley_img,p_short_desc,p_big_desc,p_quantity,p_status) VALUES ('$p_name', '$p_sub_category', '$p_brand','$regular_price','$offer_price','$updatedname','$gallery_images_names_for_database','$p_small_desc','$p_big_desc','$stock','1')";
+            $pInsertSqlResult = mysqli_query($db, $pInsertSql);
+            if($pInsertSqlResult){
+                header('location: product.php?data=view');
+            }else{
+                die('Brand insert error!'.mysqli_error($db));
+            }
+        }else{
+            $p_featured_img_err='<div class="alert alert-danger mb-0 mt-2">Please upload png, jpg or jpeg file</div>';
+        }
     }else{
-        die('Brand insert error!'.mysqli_error($db));
+        $p_featured_img_err='<div class="alert alert-danger mb-0 mt-2">Featured Image Required!</div>';
     }
+
+    
 
     $debugging = $p_category.'<br>'.$p_sub_category;
     
