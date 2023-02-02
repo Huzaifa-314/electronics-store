@@ -66,7 +66,7 @@
                   <div id="img-preview" style="width: fit-content; height:fit-content;"></div>
                 </div>
                 <div class="">
-                  <input name="editid" value="<?php echo $eb_id; ?>" type="hidden">
+                  <input name="editid" value="<?php echo $editid; ?>" type="hidden">
                   <button type="submit" class="btn btn-primary" name="update_brand">Update Brand</button>
                 </div>
               </form><!-- End No Labels Form -->

@@ -1,7 +1,7 @@
 <?php
 
     include '../include/connection.php';
-    include '../inc/functions.php';
+    include '../include/function.php';
 
 
     //update category
@@ -45,9 +45,9 @@
     // brand information update
 
 if(isset($_POST['update_brand'])){
-    $brand_name     = $_POST['brand_name'];
+    $brand_name     = $_POST['b_name'];
     $brand_status   = $_POST['b_status'];
-    $edit_id   = $_POST['edit_id'];
+    $edit_id   = $_POST['editid'];
     $file_name      = $_FILES['choose-file']['name'];
     $tmp_name       = $_FILES['choose-file']['tmp_name'];
 
@@ -56,16 +56,16 @@ if(isset($_POST['update_brand'])){
 
         if($file){
 
-            delete_file('b_logo','mart_brand','ID',$edit_id,'../assets/img/products/brand/');
+            delete_file('b_image','estore_brand','ID',$edit_id,'../assets/img/products/brand/');
 
             $updatedname = rand().$file_name;
             move_uploaded_file($tmp_name, '../assets/img/products/brand/'.$updatedname);
-            $update_sql = "UPDATE mart_brand SET b_name='$brand_name',b_image = '$updatedname', b_status='$brand_status' WHERE ID='$edit_id'";
+            $update_sql = "UPDATE estore_brand SET b_name='$brand_name',b_image = '$updatedname', b_status='$brand_status' WHERE ID='$edit_id'";
         }else{
             echo 'not an image';
         }
     }else{
-        $update_sql = "UPDATE mart_brand SET b_name='$brand_name',b_status='$brand_status' WHERE ID='$edit_id'";
+        $update_sql = "UPDATE estore_brand SET b_name='$brand_name',b_status='$brand_status' WHERE ID='$edit_id'";
     }
 
     

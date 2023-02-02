@@ -49,12 +49,12 @@
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="product.php?data=add">
               <i class="bi bi-circle"></i><span>Add New Product</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="product.php?data=view">
               <i class="bi bi-circle"></i><span>View All Products</span>
             </a>
           </li>
