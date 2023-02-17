@@ -140,4 +140,15 @@ function findval($columname,$tablename,$wherecolumn,$wherevalue){
 }
 
 
+// check if its an admin or not
+function is_admin($userrole){
+    global $db;
+
+    if($userrole == 3){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 ?>

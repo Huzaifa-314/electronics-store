@@ -21,7 +21,7 @@
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="couponcode.php">
               <i class="bi bi-circle"></i><span>Cupon Code</span>
             </a>
           </li>
