@@ -1,15 +1,13 @@
 <?php include 'include/connection.php'; ?>
 <?php include 'include/function.php'; ?>
 <?php 
-ob_start();
-session_start();
-if(!empty($_SESSION['email']) && ($_SESSION['userrole'] == 3 || $_SESSION['userrole'] == 2)){
-  header('location: dashboard.php');
-}
-if(!empty($_SESSION['email']) && $_SESSION['userrole'] == 1){
-  header('location: userdashboard.php');
-}
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+ob_start();
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +55,7 @@ if(!empty($_SESSION['email']) && $_SESSION['userrole'] == 1){
               <div class="d-flex justify-content-center py-4">
                 <a href="dashboard.php" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">C-Mart</span>
+                  <span class="d-none d-lg-block">E-store</span>
                 </a>
               </div><!-- End Logo -->
 
@@ -66,54 +64,82 @@ if(!empty($_SESSION['email']) && $_SESSION['userrole'] == 1){
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
+                    <h5 class="card-title text-center pb-0 fs-4">Reset Password</h5>
+                    <p class="text-center small">Enter your email to get reset password link</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" method="POST" action="core/session.php" novalidate>
+                  <form class="row g-3 needs-validation" method="POST" novalidate>
 
                     <div class="col-12">
-                      <label for="Email" class="form-label">Email</label>
+                      <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="usermail" class="form-control" id="Email" required>
-                        <div class="invalid-feedback">Please enter your email address.</div>
+                        <input type="email" name="email" class="form-control" id="yourUsername" required>
+                        <div class="invalid-feedback">Your email address.</div>
                       </div>
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
+                    <?php 
+
+                      if(isset($_GET['msg'])){
+                        echo $_GET['msg'];
+                      }
+
+                    ?>
 
                     <div class="col-12">
-                      <?php 
-                        if(isset($_GET['error'])){
-                          echo '<span class="text-danger">'.$_GET["error"].'</span>';
-                        }
-                      ?>
-                    </div>
-
-                    <div class="col-6">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="form-check text-right">
-                        <a href="forgetpassword.php" class="form-check-label" for="rememberMe">Forget Password?</a>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit" name="login">Login</button>
+                      <button class="btn btn-primary w-100" type="submit" name="resetpass">Send Link</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Don't have account? <a href="register.php">Create an account</a></p>
                     </div>
                   </form>
 
+                  <?php 
+
+                  if(isset($_POST['resetpass'])){
+                    $email = $_POST['email'];
+                    $server_name = $_SERVER['SERVER_NAME'];
+                    $link = 'https://'.$server_name.'/admin/setpassword.php?usermail='.$email;
+
+                    // if mail / user exists or not
+
+                  //Create an instance; passing `true` enables exceptions
+                  $mail = new PHPMailer(true);
+
+                  try {
+
+                      $mail->isSMTP();
+                      $mail->Host = 'smtp.gmail.com';
+                      $mail->SMTPAuth = true;
+                      $mail->Username = 'hamim109837@gmail.com';
+                      $mail->Password = 'fehojjoofxercsya';
+                      $mail->SMTPSecure = 'ssl';
+                      $mail->Port = 465;
+
+                      $mail->setFrom('hamim109837@gmail.com');
+                      $mail->addAddress($email);
+                      $mail->isHTML(true);
+
+                      $mail->Subject = 'Reset Password!!';
+                      $mail->Body = 'Follow the reset link: '.$link;
+
+                      $mail->send();
+
+                      header('location: forgetpassword.php?msg=Send Rest Link to your Email Address');
+
+                  } catch (Exception $e) {
+                      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                  }
+
+                 
+
+                  
+
+                }
+                  
+
+                  ?>
 
                 </div>
               </div>

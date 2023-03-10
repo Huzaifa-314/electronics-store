@@ -68,7 +68,36 @@ function fetch_sub_cat()
  }
  });
 }
-window.onload = fetch_sub_cat();  
+window.onload = fetch_sub_cat();
+
+
+//generate random string
+// function genrand(){
+//   const xhr = new XMLHttpRequest();
+//   xhr.onload = function () {
+//     document.getElementById("randomcouponcode").value = xhr.responseText;
+//   }
+//   xhr.open("GET","ajax/generate_random_string.php");
+//   xhr.send();
+// }
+function randomString(length){
+  chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+  output = "";
+  for(x = 0; x < length; x++) {
+    i = Math.floor(Math.random() * 62);
+    output += chars.charAt(i);
+  }
+  return output;
+}
+
+function rand(){
+  var showrand = document.getElementById("showrand");
+  showrand.value = randomString(8);
+  return false;
+}
+
+
+
 
 
 //quill editor for short description
@@ -136,5 +165,12 @@ document.querySelector(".quillAncor").addEventListener("click", function(event) 
 });
 
 
-
-
+//ajax in show discount on list
+function showList(value){
+    const xhr = new XMLHttpRequest();
+  xhr.onload=function(){
+    document.getElementById("showDiscountOnList").innerHTML=this.responseText;
+  }
+  xhr.open("GET","ajax/fetchDiscountOnList.php?value="+value);
+  xhr.send();
+}
