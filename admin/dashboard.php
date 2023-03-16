@@ -1,6 +1,12 @@
-<?php include'include/header.php';?>
+<?php include 'include/header.php';?>
 
-<?php include'include/sidebar.php';?>
+<?php include 'include/sidebar.php';
+if(!empty($_SESSION['email']) && $_SESSION['userrole'] == 1){
+  header('location: userdashboard.php');
+}
+?>
+
+
 
   <main id="main" class="main">
 

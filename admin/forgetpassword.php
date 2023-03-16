@@ -100,37 +100,44 @@ ob_start();
                   if(isset($_POST['resetpass'])){
                     $email = $_POST['email'];
                     $server_name = $_SERVER['SERVER_NAME'];
-                    $link = 'https://'.$server_name.'/admin/setpassword.php?usermail='.$email;
+                    $link = 'https://'.$server_name.'/electronics-store/admin/setpassword.php?usermail='.$email;
 
                     // if mail / user exists or not
+                    $user = mysqli_query($db,"SELECT email FROM estore_user WHERE email = '$email' AND status='1'");
+                    $row = mysqli_fetch_assoc($user);
+                    if($row!=null){
+                      $mail = new PHPMailer(true);
+
+                      try {
+
+                          $mail->isSMTP();
+                          $mail->Host = 'smtp.gmail.com';
+                          $mail->SMTPAuth = true;
+                          $mail->Username = 'hamim109837@gmail.com';
+                          $mail->Password = 'fehojjoofxercsya';
+                          $mail->SMTPSecure = 'ssl';
+                          $mail->Port = 465;
+
+                          $mail->setFrom('hamim109837@gmail.com');
+                          $mail->addAddress($email);
+                          $mail->isHTML(true);
+
+                          $mail->Subject = 'Reset Password!!';
+                          $mail->Body = 'Follow the reset link: '.$link;
+
+                          $mail->send();
+
+                          header('location: forgetpassword.php?msg=Send Reset Link to your Email Address (If account exists)');
+
+                      } catch (Exception $e) {
+                          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                      }
+                    }else{
+                      header('location: forgetpassword.php?msg=no account found');
+                    }
 
                   //Create an instance; passing `true` enables exceptions
-                  $mail = new PHPMailer(true);
-
-                  try {
-
-                      $mail->isSMTP();
-                      $mail->Host = 'smtp.gmail.com';
-                      $mail->SMTPAuth = true;
-                      $mail->Username = 'hamim109837@gmail.com';
-                      $mail->Password = 'fehojjoofxercsya';
-                      $mail->SMTPSecure = 'ssl';
-                      $mail->Port = 465;
-
-                      $mail->setFrom('hamim109837@gmail.com');
-                      $mail->addAddress($email);
-                      $mail->isHTML(true);
-
-                      $mail->Subject = 'Reset Password!!';
-                      $mail->Body = 'Follow the reset link: '.$link;
-
-                      $mail->send();
-
-                      header('location: forgetpassword.php?msg=Send Rest Link to your Email Address');
-
-                  } catch (Exception $e) {
-                      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                  }
+                  
 
                  
 

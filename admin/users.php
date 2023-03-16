@@ -209,7 +209,7 @@
     }
     if ($data == 'edit') {
       $editid = $_GET['editid'];
-      $users = mysqli_query($db, "SELECT * FROM estore_users WHERE ID='$editid'");
+      $users = mysqli_query($db, "SELECT * FROM estore_user WHERE ID='$editid'");
       while ($row = mysqli_fetch_assoc($users)) {
         $id             = $row['ID'];
         $firstname      = $row['firstname'];
@@ -315,7 +315,7 @@
             $updatedname = rand() . $file_name;
             move_uploaded_file($tmp_name, 'assets/img/users/' . $updatedname);
 
-            $userUpdateSql = "UPDATE estore_users SET username = '$name', email = '$email', pass = '$hasspass', address = '$address', photo = '$updatedname', phone = '$phone', status = '$status' WHERE ID = '$id'";
+            $userUpdateSql = "UPDATE estore_user SET username = '$name', email = '$email', pass = '$hasspass', address = '$address', photo = '$updatedname', phone = '$phone', status = '$status' WHERE ID = '$id'";
             $update_res = mysqli_query($db, $userUpdateSql);
             if ($update_res) {
               header('location: users.php');
@@ -329,7 +329,7 @@
         if (!empty($pass) && empty($file_name)) {
           $hasspass = sha1($pass);
 
-          $userUpdateSql = "UPDATE estore_users SET username = '$name', email = '$email', pass = '$hasspass', address = '$address', phone = '$phone', status = '$status' WHERE ID = '$id'";
+          $userUpdateSql = "UPDATE estore_user SET username = '$name', email = '$email', pass = '$hasspass', address = '$address', phone = '$phone', status = '$status' WHERE ID = '$id'";
           $update_res = mysqli_query($db, $userUpdateSql);
           if ($update_res) {
             header('location: users.php');
@@ -356,7 +356,7 @@
           }
         }
         if (empty($pass) && empty($file_name)) {
-          $userUpdateSql = "UPDATE estore_users SET username = '$name', email = '$email',  address = '$address', phone = '$phone', status = '$status' WHERE ID = '$id'";
+          $userUpdateSql = "UPDATE estore_user SET username = '$name', email = '$email',  address = '$address', phone = '$phone', status = '$status' WHERE ID = '$id'";
           $update_res = mysqli_query($db, $userUpdateSql);
           if ($update_res) {
             header('location: users.php');
