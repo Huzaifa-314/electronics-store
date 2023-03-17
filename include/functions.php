@@ -17,6 +17,20 @@ function findval($columname,$tablename,$wherecolumn,$wherevalue){
     $value = $row1[$columname];
     return $value;
 }
+
+function showprice($p_sale_price,$p_reg_price){
+    if($p_reg_price!=0 && $p_sale_price!=0){
+        ?>
+            <div class="product-price"> <span class="price"> <?php echo $p_sale_price; ?> </span> <span class="price-before-discount"><?php echo $p_reg_price ?></span> </div>
+            <!-- /.product-price --> 
+        <?php
+    }else{
+        ?>
+            <div class="product-price"> <span class="price"> <?php echo $p_reg_price; ?> </span> </div>
+            <!-- /.product-price --> 
+        <?php
+    }
+}
 // function price_convert($currency)[
 //     if($currency=="usd")
 // ]
