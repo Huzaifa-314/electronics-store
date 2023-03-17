@@ -209,8 +209,8 @@ $main_p_featured_image = findval('p_featured_img', 'estore_product', 'ID', $main
                             <?php 
                           }else{
                             ?>
-                              <!-- <span class="price">$<?php echo $p_p_sale_price;?></span> -->
-                              <span class="price-strike">$<?php echo $p_p_reg_price;?></span>
+                              <span class="price">$<?php echo $p_p_reg_price;?></span>
+                              <!-- <span class="price-strike">$<?php echo $p_p_reg_price;?></span> -->
                             <?php 
                           }
                         ?>
