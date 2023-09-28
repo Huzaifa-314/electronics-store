@@ -143,7 +143,7 @@ function findval($columname,$tablename,$wherecolumn,$wherevalue){
 //generate random string
 function RandomString($thiss){
     $length=8;
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {
