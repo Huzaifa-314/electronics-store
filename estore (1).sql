@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2023 at 10:16 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Sep 28, 2023 at 12:46 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `estore_brand` (
   `b_name` varchar(100) NOT NULL,
   `b_image` varchar(255) NOT NULL,
   `b_status` int(11) NOT NULL COMMENT '1 for active 0 for inactive'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `estore_brand`
@@ -55,7 +55,7 @@ CREATE TABLE `estore_category` (
   `c_image` varchar(255) NOT NULL DEFAULT '0',
   `is_parent` int(11) NOT NULL DEFAULT 0,
   `c_status` int(11) NOT NULL DEFAULT 1 COMMENT '0 for inactive and 1 for active'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `estore_category`
@@ -109,7 +109,7 @@ CREATE TABLE `estore_coupon` (
   `dis_on_type` int(11) DEFAULT NULL COMMENT '0 for specific products, 1 for specific category and 2 for specific brand and 3 for all products',
   `discount_on` varchar(255) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 1 COMMENT '1 for active and 0 for inactive'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `estore_coupon`
@@ -137,7 +137,7 @@ CREATE TABLE `estore_product` (
   `p_big_desc` text DEFAULT NULL,
   `p_quantity` int(11) NOT NULL DEFAULT 0,
   `p_status` int(11) NOT NULL DEFAULT 1 COMMENT '0 for inactive and 1 for active'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `estore_product`
@@ -172,15 +172,15 @@ CREATE TABLE `estore_user` (
   `phone` varchar(12) DEFAULT NULL,
   `userrole` int(11) NOT NULL COMMENT '0 for subscriber 1 for customer 2 for editor 3 for super admin',
   `status` int(11) DEFAULT NULL COMMENT '0 for inactive and 1 for active'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `estore_user`
 --
 
 INSERT INTO `estore_user` (`ID`, `firstname`, `lastname`, `username`, `email`, `pass`, `address`, `photo`, `phone`, `userrole`, `status`) VALUES
-(5, '', '', 'Huzaifa', 'contact.mdhuzaifa@gmail.com', '226084a53c97bb2fdc7d067754ef241f7fb17c82', 'Mirpur-12, Dhaka, Bangladesh', '', '01813016898', 3, 1),
-(6, '', '', 'Rokibul Hasan', 'hacker@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', '                       lol                                                            ', '1164514911298938170_1222569708477963_7133349612134539342_n.jpg', '322', 1, 1);
+(5, '', '', 'Huzaifa', 'contact.mdhuzaifa@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 'Mirpur-12, Dhaka, Bangladesh', '', '01813016898', 3, 1),
+(6, '', '', 'Rokibul Hasan', 'hacker@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', '                       lol                                                            ', '1164514911298938170_1222569708477963_7133349612134539342_n.jpg', '322', 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -226,7 +226,7 @@ ALTER TABLE `estore_user`
 -- AUTO_INCREMENT for table `estore_brand`
 --
 ALTER TABLE `estore_brand`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `estore_category`
