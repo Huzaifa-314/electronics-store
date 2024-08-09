@@ -47,7 +47,7 @@
                         <div class="action">
                           <div class="add-cart-button btn-group">
                             <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                            <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                            <a href="cart.php?id=<?php echo $hot_ID;?>"><button class="btn btn-primary cart-btn" type="button">Add to cart</button></a>
                           </div>
                         </div>
                         <!-- /.action --> 

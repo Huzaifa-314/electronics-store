@@ -17,7 +17,7 @@ if (isset($_POST['add_category'])) {
 
     $splited_files = explode('.',$file_name);
     $extn = strtolower(end($splited_files));
-    $extensions=array('png','jpg','jpeg');
+    $extensions=array('png','jpg','jpeg','webp','avif');
 
     if(!empty($file_name)){
         if(in_array($extn,$extensions) === true){
@@ -31,7 +31,7 @@ if (isset($_POST['add_category'])) {
                 die('Category insert error!' . mysqli_error($db));
             }
         }else{
-            $imgErr='<div class="alert alert-danger mb-0 mt-2">Please upload png, jpg or jpeg file</div>';
+            $imgErr='<div class="alert alert-danger mb-0 mt-2">Please upload png/jpg/jpeg/webp/avif file</div>';
         }
     }else{
         $cat_insert = "INSERT INTO estore_category (c_name,is_parent,c_status) VALUES ('$name','$is_parent','1')";
@@ -137,7 +137,7 @@ if(isset($_POST['add_product'])){
                 die('Brand insert error!'.mysqli_error($db));
             }
         }else{
-            $p_featured_img_err='<div class="alert alert-danger mb-0 mt-2">Please upload png, jpg or jpeg file</div>';
+            $p_featured_img_err='<div class="alert alert-danger mb-0 mt-2">Please upload png/jpg/jpeg/avif/webp/jfif file</div>';
         }
     }else{
         $p_featured_img_err='<div class="alert alert-danger mb-0 mt-2">Featured Image Required!</div>';

@@ -112,57 +112,71 @@ document.querySelector(".quillAncor").addEventListener("click", function(event) 
 
 
 //quill editor for big description
-var CustomQuillFull = new Quill(".custom-quill-editor-full", {
-  modules: {
-    toolbar: [
-      [{
-        font: []
-      }, {
-        size: []
-      }],
-      ["bold", "italic", "underline", "strike"],
-      [{
-          color: []
-        },
-        {
-          background: []
-        }
-      ],
-      [{
-          script: "super"
-        },
-        {
-          script: "sub"
-        }
-      ],
-      [{
-          list: "ordered"
-        },
-        {
-          list: "bullet"
-        },
-        {
-          indent: "-1"
-        },
-        {
-          indent: "+1"
-        }
-      ],
-      ["direction", {
-        align: []
-      }],
-      ["link"],
-      ["clean"]
-    ]
-  },
-  theme: "snow"
+// var CustomQuillFull = new Quill(".custom-quill-editor-full", {
+//   modules: {
+//     toolbar: [
+//       [{
+//         font: []
+//       }, {
+//         size: []
+//       }],
+//       ["bold", "italic", "underline", "strike"],
+//       [{
+//           color: []
+//         },
+//         {
+//           background: []
+//         }
+//       ],
+//       [{
+//           script: "super"
+//         },
+//         {
+//           script: "sub"
+//         }
+//       ],
+//       [{
+//           list: "ordered"
+//         },
+//         {
+//           list: "bullet"
+//         },
+//         {
+//           indent: "-1"
+//         },
+//         {
+//           indent: "+1"
+//         }
+//       ],
+//       ["direction", {
+//         align: []
+//       }],
+//       ["link"],
+//       ["clean"]
+//     ]
+//   },
+//   theme: "snow"
+// });
+
+var CustomQuillFull = tinymce.init({
+  selector: '.custom-quill-editor-full',
+  plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table directionality emoticons template paste textpattern',
+  toolbar: 'undo redo | formatselect | fontselect fontsizeselect | bold italic underline strikethrough | forecolor backcolor | superscript subscript | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | removeformat | code fullscreen'
 });
 
+
 //product big description
+// document.querySelector(".quillAncor").addEventListener("click", function(event) {
+//   var pBigDesc = CustomQuillFull.root.innerHTML;
+//   document.getElementById("p_big_desc").value = pBigDesc;
+// });
+
+// Product big description
 document.querySelector(".quillAncor").addEventListener("click", function(event) {
-  var pBigDesc = CustomQuillFull.root.innerHTML;
+  var pBigDesc = tinymce.activeEditor.getContent('.custom-quill-editor-full');
   document.getElementById("p_big_desc").value = pBigDesc;
 });
+
 
 
 //ajax in show discount on list

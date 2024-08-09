@@ -25,6 +25,7 @@ Text Domain:  Marazzo
 14.  Footer
 15.  Responsive
 16.  Testimonials
+17. custom
 
 /* */
 /*===================================================================================*/
@@ -2830,7 +2831,7 @@ font-family: FontAwesome;
   -moz-transition: all 0.5s linear 0s;
   -o-transition: all 0.5s linear 0s;
   transition: all 0.5s linear 0s;
-  width: 100%;
+  width: fit-content;
   z-index: 666;
   left: 50%;
   position:absolute;
@@ -5421,7 +5422,7 @@ font-family: FontAwesome;
   font-size: 15px;
   height: 35px;
   left: 0;
-  padding: 0 20px 0 18px;
+  padding: 0 0 0 0;
   position: absolute;
   top: 0;
   width: 70px;
@@ -7371,3 +7372,8 @@ li.dropdown.navbar-right.special-menu {
 
 .home-banner { margin-top: 30px;}
 .home-banner img {border-radius:5px}	
+
+
+.alert{
+  padding:7px 15px;
+}

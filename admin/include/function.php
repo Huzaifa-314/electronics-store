@@ -81,7 +81,7 @@ function is_img($file_name){
     $splitedArray = explode('.', $file_name);
     $extn = strtolower(end($splitedArray));
 
-    $extentions = array('png', 'jpg', 'jpeg');
+    $extentions = array('png', 'jpg', 'jpeg','webp','avif','jfif');
 
     if(in_array($extn, $extentions) === true){
         return true;
