@@ -153,11 +153,9 @@
                             <div class="action">
                               <ul class="list-unstyled">
                                 <li class="add-cart-button btn-group">
-                                  <a href="cart.php?id="><button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button></a>
-                                  <a href="cart.php?id="><button class="btn btn-primary cart-btn" type="button">Add to cart</button></a>
+                                  <a href="cart.php?id=<?php echo $all_ID; ?>"><button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button></a>
+                                  <a href="cart.php?id=<?php echo $all_ID; ?>"><button class="btn btn-primary cart-btn" type="button">Add to cart</button></a>
                                 </li>
-                                <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="cart.php?id=" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="cart.php?id=" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                               </ul>
                             </div>
                             <!-- /.action -->
@@ -314,7 +312,7 @@
                         <!-- /.product-image -->
 
                         <div class="product-info text-left">
-                          <h3 class="name"><a href="detail.html"><?php echo $pro_p_name;?></a></h3>
+                          <h3 class="name"><a href="product_single.php?id=<?php echo $pro_ID?>"><?php echo $pro_p_name;?></a></h3>
                           <div class="product-price"> <span class="price"> <?php showprice($pro_p_sale_price,$pro_p_reg_price) ?> </span></div>
                           <!-- /.product-price -->
 
