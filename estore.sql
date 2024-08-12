@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2024 at 09:26 PM
+-- Generation Time: Aug 12, 2024 at 10:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -129,9 +129,8 @@ CREATE TABLE `estore_cart` (
 --
 
 INSERT INTO `estore_cart` (`ID`, `p_id`, `qty`, `user_id`, `updated_at`) VALUES
-(20, 50, 1, 7, '2024-08-09 15:16:10'),
-(21, 49, 1, 7, '2024-08-09 16:27:36'),
-(22, 50, 1, 5, '2024-08-09 18:21:23');
+(22, 50, 1, 5, '2024-08-09 18:21:23'),
+(24, 49, 1, 5, '2024-08-12 18:33:26');
 
 -- --------------------------------------------------------
 
@@ -191,6 +190,74 @@ CREATE TABLE `estore_coupon` (
 
 INSERT INTO `estore_coupon` (`ID`, `coupon`, `amount`, `dis_type`, `starting_date`, `expire_date`, `dis_on_type`, `discount_on`, `status`) VALUES
 (10, 'sgMy06Q6', 10, 1, '2023-03-22', '2023-03-31', 1, ',2', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `estore_orders`
+--
+
+CREATE TABLE `estore_orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
+  `transaction_id` varchar(255) DEFAULT NULL,
+  `currency` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `estore_orders`
+--
+
+INSERT INTO `estore_orders` (`id`, `user_id`, `name`, `email`, `phone`, `amount`, `address`, `status`, `transaction_id`, `currency`) VALUES
+(23, 7, 'Huzaifa', 'contact.mdhuzaifa@gmail.com', '01543534698', 8994, 'Dhaka', 'confirmed', 'SSLCZ_TEST_66ba6c45945f0', 'BDT'),
+(24, 5, 'New', 'new@gmail.com', '+8801243555523', 8998, 'Dhaka', 'confirmed', 'SSLCZ_TEST_66ba6cc8ba907', 'BDT');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `estore_order_items`
+--
+
+CREATE TABLE `estore_order_items` (
+  `ID` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `estore_payment`
+--
+
+CREATE TABLE `estore_payment` (
+  `id` int(11) NOT NULL,
+  `tran_id` varchar(255) NOT NULL,
+  `bank_tran_id` varchar(255) DEFAULT NULL,
+  `card_type` varchar(50) DEFAULT NULL,
+  `status` varchar(20) NOT NULL,
+  `tran_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `estore_payment`
+--
+
+INSERT INTO `estore_payment` (`id`, `tran_id`, `bank_tran_id`, `card_type`, `status`, `tran_date`) VALUES
+(1, 'SSLCZ_TEST_66ba638496943', '24081313336AtBuruGkHbQZHLi', 'BKASH-BKash', 'Confirmed', '2024-08-13 01:33:24'),
+(2, 'SSLCZ_TEST_66ba644b8991d', '240813136541iclh0PRwvB9FL9', 'BKASH-BKash', 'Confirmed', '2024-08-13 01:36:43'),
+(3, 'SSLCZ_TEST_66ba652aeb079', '24081314037WN0D0EOkZh0t8PI', 'BKASH-BKash', 'Confirmed', '2024-08-13 01:40:27'),
+(4, 'SSLCZ_TEST_66ba66dabec01', '240813147491MMW1HlCEWd5UIy', 'NAGAD-Nagad', 'Confirmed', '2024-08-13 01:47:38'),
+(5, 'SSLCZ_TEST_66ba6c45945f0', '240813210531rp4A1Tr87AvCtm', 'BKASH-BKash', 'Confirmed', '2024-08-13 02:10:45'),
+(6, 'SSLCZ_TEST_66ba6cc8ba907', '240813213041yO0KiSlHOOXecG', 'BKASH-BKash', 'Confirmed', '2024-08-13 02:12:56');
 
 -- --------------------------------------------------------
 
@@ -280,6 +347,27 @@ ALTER TABLE `estore_coupon`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `estore_orders`
+--
+ALTER TABLE `estore_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user_id_user` (`user_id`);
+
+--
+-- Indexes for table `estore_order_items`
+--
+ALTER TABLE `estore_order_items`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `estore_payment`
+--
+ALTER TABLE `estore_payment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `estore_product`
 --
 ALTER TABLE `estore_product`
@@ -307,7 +395,7 @@ ALTER TABLE `estore_brand`
 -- AUTO_INCREMENT for table `estore_cart`
 --
 ALTER TABLE `estore_cart`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `estore_category`
@@ -320,6 +408,24 @@ ALTER TABLE `estore_category`
 --
 ALTER TABLE `estore_coupon`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `estore_orders`
+--
+ALTER TABLE `estore_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `estore_order_items`
+--
+ALTER TABLE `estore_order_items`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `estore_payment`
+--
+ALTER TABLE `estore_payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `estore_product`
@@ -343,6 +449,19 @@ ALTER TABLE `estore_user`
 ALTER TABLE `estore_cart`
   ADD CONSTRAINT `fk_p_id_cart` FOREIGN KEY (`p_id`) REFERENCES `estore_product` (`ID`),
   ADD CONSTRAINT `fk_user_id_cart` FOREIGN KEY (`user_id`) REFERENCES `estore_user` (`ID`);
+
+--
+-- Constraints for table `estore_orders`
+--
+ALTER TABLE `estore_orders`
+  ADD CONSTRAINT `fk_user_id_user` FOREIGN KEY (`user_id`) REFERENCES `estore_user` (`ID`);
+
+--
+-- Constraints for table `estore_order_items`
+--
+ALTER TABLE `estore_order_items`
+  ADD CONSTRAINT `estore_order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `estore_order` (`ID`),
+  ADD CONSTRAINT `estore_order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `estore_product` (`ID`);
 
 --
 -- Constraints for table `estore_product`
