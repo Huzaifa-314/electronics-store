@@ -16,7 +16,7 @@ if (isset($_POST['cash_on_delivery'])) {
     $user_id = $_POST['user_id'];
 
     $sql = "INSERT INTO estore_orders (user_id, name, email, phone, amount, address, status, transaction_id,currency)
-                                VALUES ('$user_id', '$name', '$email', '$phone','$transaction_amount','$address','Cash On Delivery', '$tran_id','$currency')";
+                                VALUES ('$user_id', '$name', '$email', '$phone','$transaction_amount','$address','COD', '$tran_id','$currency')";
     $db->query($sql);
     //populate order_item database
     $order_id = mysql_qrow("select eo.id from estore_orders as eo join estore_payment as ep where eo.transaction_id = '$tran_id'")['id'];

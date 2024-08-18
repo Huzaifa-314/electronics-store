@@ -53,7 +53,7 @@ if (!$is_logged_in) {
                                         <td class="cart-product-sub-total"><span class="cart-sub-total-price"><?php echo $order_address; ?></span></td>
                                         <td><ol>
                                             <?php
-                                            $order_product_res = mysql_qres("select * from estore_order_items as oi join estore_product as p on oi.product_id=p.id where order_id = $order_id order by oi.id asc");
+                                            $order_product_res = mysql_qres("select * from estore_order_items as oi join estore_product as p on oi.product_id=p.id where order_id = $order_id");
                                             while ($order_product_row = mysqli_fetch_assoc($order_product_res)) {
                                                 extract($order_product_row, EXTR_PREFIX_ALL, "order_product");
                                             ?>
