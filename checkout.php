@@ -5,6 +5,9 @@
 if (!$is_logged_in) {
     header("Location: sign-in.php");
 }
+if($is_cart_empty){
+    header("Location: cart.php");
+}
 ?>
 
 <div class="breadcrumb">
@@ -95,8 +98,9 @@ if (!$is_logged_in) {
 
 
                     <div class="mb-3">
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id;?>>
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St"
+                        <input type="text" name="address" class="form-control" id="address" placeholder="1234 Main St"
                             required>
                         <div class="invalid-feedback">
                             Please enter your shipping address.
@@ -139,13 +143,12 @@ if (!$is_logged_in) {
                     </div> -->
                     <hr class="mb-4">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="same-address">
+                        <input type="checkbox" name="cash_on_delivery" class="custom-control-input" id="same-address">
                         <input type="hidden" value="<?php echo $grand_grand_total?>" name="amount" id="total_amount" required />
-                        <label class="custom-control-label" for="same-address">Shipping address is the same as my billing
-                            address</label>
+                        <label class="custom-control-label" for="same-address">Cash on delivery</label>
                     </div>
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout (Hosted)</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
                 </form>
             </div>
         </div>

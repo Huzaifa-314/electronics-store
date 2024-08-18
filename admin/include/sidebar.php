@@ -3,12 +3,12 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link " href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
+        <!-- <li class="nav-item">
+          <a class="nav-link " href="dashb">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>End Dashboard Nav -->
       <?php 
 
       if($_SESSION['userrole'] == 3){
@@ -19,18 +19,18 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="order.php">
               <i class="bi bi-circle"></i><span>All Orders</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="coupon.php?data=view">
               <i class="bi bi-circle"></i><span>Cupon Code</span>
             </a>
-          </li>
+          </li> -->
           <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Payment Gateway</span>
+            <a href="payment_history.php">
+              <i class="bi bi-circle"></i><span>Payment History</span>
             </a>
           </li>
         </ul>
@@ -64,11 +64,11 @@
         </ul>
       </li><!-- Product Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Reports</span>
         </a>
-      </li><!-- End Reports Nav -->
+      </li>End Reports Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
@@ -123,14 +123,6 @@
       }
 
       ?>
-      <li class="nav-heading">Pages</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-palette"></i>
-          <span>Theme option</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
 
     </ul>
 

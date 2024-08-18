@@ -21,7 +21,7 @@ if (isset($_SESSION['id'])) {
   <meta name="author" content="">
   <meta name="keywords" content="MediaCenter, Template, eCommerce">
   <meta name="robots" content="all">
-  <title>E-store</title>
+  <title>Online Mobile Shop</title>
 
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -57,6 +57,7 @@ if (isset($_SESSION['id'])) {
         <div class="header-top-inner">
           <div class="cnt-account">
             <ul class="list-unstyled">
+              <li class="myaccount"><a href="my_order.php"><span>My Orders</span></a></li>
               <li class="myaccount"><a href="shop.php"><span>Shop</span></a></li>
               <li class="header_cart hidden-xs"><a href="cart.php"><span>My Cart</span></a></li>
               <li class="check"><a href="checkout.php"><span>Checkout</span></a></li>
@@ -76,31 +77,11 @@ if (isset($_SESSION['id'])) {
 
           <div class="cnt-block">
             <ul class="list-unstyled list-inline white">
-              <li class=""> <a href="contact.php"><span class="value">4 Embankment Drive Road,Sector-10, Uttara Model Town, Dhaka-1230.</span></a></li>
-
-              <!-- <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="?currency=usd">USD</a></li>
-                  <li><a href="?currency=tk">TK</a></li>
+              <li class=""> <a href="contact.php"><span class="value">Sector-10, Uttara Model Town, Dhaka-1230.</span></a></li>
                   <?php
-                  // if(isset($_GET['currency'])){
-                  //   if($_GET['currency']=="usd"){
-                  //     $currency = "$";
-                  //   }
-                  //   if($_GET['currency']=="tk"){
-                  //     $currency = "৳";
-                  //   }
-                  // }
                   ?>
                 </ul>
-              </li> -->
-              <!-- <li class="dropdown dropdown-small lang"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">English </span><b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">English</a></li>
-                <li><a href="#">French</a></li>
-                <li><a href="#">German</a></li>
-              </ul>
-            </li> -->
+              </li> 
             </ul>
             <!-- /.list-unstyled -->
           </div>
@@ -239,8 +220,8 @@ if (isset($_SESSION['id'])) {
                       <?php
                       if (!$is_cart_empty) {
                       ?><a href="checkout.php" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a><?php
-                                                                                                            }
-                                                                                                              ?>
+                       }
+                       ?>
                     </div>
                     <!-- /.cart-total-->
 
@@ -290,38 +271,7 @@ if (isset($_SESSION['id'])) {
                   <?php
                   }
                   ?>
-
-
-
-                  <!-- <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Pages</a>
-                    <ul class="dropdown-menu pages">
-                      <li>
-                        <div class="yamm-content">
-                          <div class="row">
-                            <div class="col-xs-12 col-menu">
-                              <ul class="links">
-                                <li><a href="home.php">Home</a></li>
-                                <li><a href="category.html">Category</a></li>
-                                <li><a href="detail.html">Detail</a></li>
-                                <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog-details.html">Blog Detail</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><a href="sign-in.html">Sign In</a></li>
-                                <li><a href="my-wishlist.html">Wishlist</a></li>
-                                <li><a href="terms-conditions.html">Terms and Condition</a></li>
-                                <li><a href="track-orders.html">Track Orders</a></li>
-                                <li><a href="product-comparison.html">Product-Comparison</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="404.html">404</a></li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </li> -->
+                 
 
                 </ul>
                 <!-- /.navbar-nav -->

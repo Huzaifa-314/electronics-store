@@ -12,7 +12,7 @@
         <div class="feature-box">
           <div class="icon-support"></div>
           <div class="content-blocks">call
-            +880 1xxx-xxxxxx</div>
+            +8801787301500</div>
         </div>
       </li>
       <li>
@@ -49,18 +49,18 @@
                 <li class="media">
                   <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
                   <div class="media-body">
-                    <p>4 Embankment Drive Road,Sector-10, Uttara Model Town, Dhaka-1230.</p>
+                    <p>Sector-10, Uttara Model Town, Dhaka-1230.</p>
                   </div>
                 </li>
                 <li class="media">
                   <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
                   <div class="media-body">
-                    <p> +(880) 1xxx-xxxxxx / +(880) 1xxx-xxxxxx</p>
+                    <p> +8801787301500</p>
                   </div>
                 </li>
                 <li class="media">
                   <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
-                  <div class="media-body"> <span><a href="#">contact@mobilenen.com</a></span> </div>
+                  <div class="media-body"> <span><a href="#">toha@mobilenen.com</a></span> </div>
                 </li>
               </ul>
             </div>

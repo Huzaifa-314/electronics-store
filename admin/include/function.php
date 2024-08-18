@@ -1,6 +1,14 @@
 <?php 
 include 'connection.php';
 
+
+function mysql_qres($sql){
+    global $db;
+    $res = mysqli_query($db,$sql);
+    return $res;
+}
+
+
 //find sub category
 function show_sub_category($cat_id){
     global $db;

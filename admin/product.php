@@ -31,7 +31,7 @@
                                         <th scope="col">Price</th>
                                         <th scope="col">Category</th>
                                         <th scope="col">Brand</th>
-                                        <th scope="col">Qualtity</th>
+                                        <th scope="col">Quantity</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -427,6 +427,6 @@
 
         ?>
     </section>
-    <?php echo $debugging; ?>
+    <!-- <?php echo $debugging; ?> -->
 </main>
 <?php include 'include/footer.php'; ?>

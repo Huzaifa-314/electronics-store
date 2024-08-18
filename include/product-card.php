@@ -1,35 +1,27 @@
-<div class="products">
+<?php 
+$is_out_of_stock = $pro_p_quantity == 0;
+$product_link = "product_single.php?id=$pro_ID";
+$cart_link = "cart.php?id=$pro_ID";
+?>
+
+<div class="products" style="<?php if($is_out_of_stock) echo "opacity:0.5" ?>">
     <div class="product">
         <div class="product-image">
             <div class="image">
-                <a href="product_single.php?id=<?php echo $pro_ID; ?>">
+                <a href="<?php echo $product_link;?>">
                     <img src="admin/assets/img/products/<?php echo $pro_p_featured_img; ?>" alt="">
                     <!-- <img src="assets/images/products/p1_hover.jpg" alt="" class="hover-image"> -->
                 </a>
             </div>
             <!-- /.image -->
-
-            <!-- <div class="tag new"><span>new</span></div> -->
+             
+            <?php echo $is_out_of_stock?"<div class=\"tag out-of-stock\"><span>Out of Stock</span></div>":"";?>
         </div>
         <!-- /.product-image -->
 
         <div class="product-info text-left">
-            <h3 class="name"><a href="product_single.php?id=<?php echo $pro_ID; ?>"><?php echo $pro_p_name; ?></a></h3>
-            <!-- <div class="rating rateit-small"></div> -->
-            <!-- <div class="description"></div> -->
-            <?php
-            if ($pro_p_sale_price == 0) {
-            ?>
-                <div class="product-price"> <span class="price">৳<?php echo $pro_p_reg_price; ?> </span> </div>
-            <?php
-            } else {
-            ?>
-                <div class="product-price"> <span class="price">৳<?php echo $pro_p_sale_price; ?> </span> <span class="price-before-discount"><?php echo $pro_p_reg_price; ?></span> </div>
-            <?php
-            }
-            ?>
-
-            <!-- /.product-price -->
+            <h3 class="name"><a href="<?php echo $product_link;?>"><?php echo $pro_p_name; ?></a></h3>
+            <?php showprice($pro_p_sale_price, $pro_p_reg_price);?>
 
         </div>
         <!-- /.product-info -->
@@ -37,11 +29,9 @@
             <div class="action">
                 <ul class="list-unstyled">
                     <li class="add-cart-button btn-group">
-                        <button onclick="location.href = 'cart.php?id=<?php echo $pro_ID; ?>';" class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                        <button onclick="location.href = 'cart.php?id=<?php echo $pro_ID; ?>';" class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        <button <?php echo $is_out_of_stock?"disabled":"" ?> onclick="location.href = '<?php echo $cart_link; ?>';" class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                        <button <?php echo $is_out_of_stock?"disabled":"" ?> onclick="location.href = '<?php echo $cart_link; ?>';" class="btn btn-primary cart-btn" type="button">Add to cart</button>
                     </li>
-                    <!-- <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li> -->
-                    <!-- <li class="lnk"> <a class="add-to-cart" href="product-comparison.php?id=<?php echo $pro_ID; ?>" title="Compare"> <i class="fa fa-signal"></i> </a> </li> -->
                 </ul>
             </div>
             <!-- /.action -->

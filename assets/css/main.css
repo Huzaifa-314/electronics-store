@@ -2892,6 +2892,12 @@ font-family: FontAwesome;
   position: relative;
   z-index: 100;
 }
+.tag.out-of-stock{
+  background-color: red;
+  height: 50px;
+  width: 130px !important;
+  border-radius: 0px;
+}
 .tag.new {
   background: #46aad7;
 }

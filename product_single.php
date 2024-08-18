@@ -13,6 +13,8 @@ $main_p_category = findval('p_category', 'estore_product', 'ID', $main_id);
 $main_category_id = findval('is_parent', 'estore_category', 'ID', $main_p_category);
 $main_category_name = findval('c_name', 'estore_category', 'ID', $main_category_id);
 $main_p_featured_image = findval('p_featured_img', 'estore_product', 'ID', $main_id);
+
+$is_out_of_stock = $main_p_quantity == 0;
 ?>
 
 
@@ -176,6 +178,7 @@ $main_p_featured_image = findval('p_featured_img', 'estore_product', 'ID', $main
 
                   </div><!-- /.row -->
                 </div><!-- /.price-container -->
+                <?php echo $is_out_of_stock?"<h1 style='color:red;'>Out of stock</h1>":""?>
 
                 <div class="quantity-container info-container">
                   <div class="row">
@@ -189,13 +192,14 @@ $main_p_featured_image = findval('p_featured_img', 'estore_product', 'ID', $main
                         <div class="cart-quantity">
                           <div class="quant-input">
                             <input name="id" type="hidden" value="<?php echo $main_id; ?>">
-                            <input name="quantity" type="number" min="1" max="<?php echo $main_p_quantity?>" value="1">
+                            <input name="quantity" type="number" min="<?php echo $is_out_of_stock?0:1?>" max="<?php echo $main_p_quantity?>" value="<?php echo $is_out_of_stock?0:1?>">
                           </div>
                         </div>
                       </div>
+                      
 
                       <div class="add-btn">
-                        <button class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+                        <button <?php echo $is_out_of_stock?"disabled":""?> class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
                       </div>
                     </form>
 
@@ -230,134 +234,7 @@ $main_p_featured_image = findval('p_featured_img', 'estore_product', 'ID', $main
                   <div class="product-tab">
                     <?php echo $p_p_big_desc; ?>
                   </div>
-                </div><!-- /.tab-pane -->
-
-                <!-- <div id="review" class="tab-pane">
-                  <div class="product-tab">
-
-                    <div class="product-reviews">
-                      <h4 class="title">Customer Reviews</h4>
-
-                      <div class="reviews">
-                        <div class="review">
-                          <div class="review-title"><span class="summary">We love this product</span><span class="date"><i class="fa fa-calendar"></i><span>1 days ago</span></span></div>
-                          <div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit."</div>
-                        </div>
-
-                      </div>
-                    </div>
-
-
-
-                    <div class="product-add-review">
-                      <h4 class="title">Write your own review</h4>
-                      <div class="review-table">
-                        <div class="table-responsive">
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th class="cell-label">&nbsp;</th>
-                                <th>1 star</th>
-                                <th>2 stars</th>
-                                <th>3 stars</th>
-                                <th>4 stars</th>
-                                <th>5 stars</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="cell-label">Quality</td>
-                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                              </tr>
-                              <tr>
-                                <td class="cell-label">Price</td>
-                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                              </tr>
-                              <tr>
-                                <td class="cell-label">Value</td>
-                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-
-                      <div class="review-form">
-                        <div class="form-container">
-                          <form class="cnt-form">
-
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label for="exampleInputName">Your Name <span class="astk">*</span></label>
-                                  <input type="text" class="form-control txt" id="exampleInputName" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputSummary">Summary <span class="astk">*</span></label>
-                                  <input type="text" class="form-control txt" id="exampleInputSummary" placeholder="">
-                                </div>
-                              </div>
-
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                  <label for="exampleInputReview">Review <span class="astk">*</span></label>
-                                  <textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="action text-right">
-                              <button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
-                            </div>
-
-                          </form>
-                        </div>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </div> -->
-
-                <!-- <div id="tags" class="tab-pane">
-                  <div class="product-tag">
-
-                    <h4 class="title">Product Tags</h4>
-                    <form class="form-inline form-cnt">
-                      <div class="form-container">
-
-                        <div class="form-group">
-                          <label for="exampleInputTag">Add Your Tags: </label>
-                          <input type="email" id="exampleInputTag" class="form-control txt">
-
-
-                        </div>
-
-                        <button class="btn btn-upper btn-primary" type="submit">ADD TAGS</button>
-                      </div>
-                    </form>
-
-                    <form class="form-inline form-cnt">
-                      <div class="form-group">
-                        <label>&nbsp;</label>
-                        <span class="text col-md-offset-3">Use spaces to separate tags. Use single quotes (') for phrases.</span>
-                      </div>
-                    </form>
-
-                  </div>
-                </div> -->
+                </div>
 
               </div>
             </div>

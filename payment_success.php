@@ -46,12 +46,53 @@
                             if ($db->query($sql_payment) === TRUE) {
                                 echo '<h2 class="text-center text-success">Congratulations! Your Transaction is Successful.</h2>';
 
+
+                                //populate order_item database
+                                $order_id = mysql_qrow("select eo.id from estore_orders as eo join estore_payment as ep where eo.transaction_id = '$tran_id'")['id'];
+                                $user_id = mysql_qrow("select eo.user_id from estore_orders as eo join estore_payment as ep where eo.transaction_id = '$tran_id'")['user_id'];
+                                // Fetch data from estore_cart
+                                $sql = "SELECT p_id, qty FROM estore_cart WHERE user_id = $user_id";
+                                $result = mysqli_query($db, $sql);
+
+                                if ($result) {
+                                    // Prepare SQL statement for insertion
+                                    $stmt = mysqli_prepare($db, "INSERT INTO estore_order_items (order_id, product_id, qty) VALUES (?, ?, ?)");
+
+                                    if ($stmt) {
+                                        // Bind parameters
+                                        mysqli_stmt_bind_param($stmt, "iii", $order_id, $product_id, $qty);
+
+                                        // Fetch each row and insert into estore_order_items
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $product_id = $row['p_id'];
+                                            $qty = $row['qty'];
+
+                                            $sql_qty_update = "update estore_product set p_quantity = p_quantity - $qty WHERE id = $product_id";
+                                            $db->query($sql_qty_update);
+
+
+                                            mysqli_stmt_execute($stmt);
+                                        }
+
+                                        // Close the statement
+                                        mysqli_stmt_close($stmt);
+                                    } else {
+                                        echo "Prepare failed: " . mysqli_error($db);
+                                    }
+
+                                    // Free result set
+                                    mysqli_free_result($result);
+                                } else {
+                                    echo "Query failed: " . mysqli_error($db);
+                                }
+
                                 // Delete all records related to the current user's ID
-                                $user_id = mysql_qrow("select user_id from estore_orders as eo join estore_payment as ep where eo.transaction_id = ep.tran_id")['user_id'];
                                 $sql_delete_cart = "DELETE FROM estore_cart WHERE user_id = $user_id";
                                 if ($db->query($sql_delete_cart) !== TRUE) {
                                     echo '<h4 class="text-center text-warning">Warning: Unable to clear your cart. Please contact support.</h4>';
                                 }
+
+                                
                             } else {
                                 echo '<h2 class="text-center text-danger">Error saving payment information: ' . $db->error . '</h2>';
                             }

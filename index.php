@@ -7,7 +7,6 @@
       <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
 
         <!-- ================================== TOP NAVIGATION ================================== -->
-        <?php include 'include/categorybar.php'; ?>
         <!-- /.side-menu -->
         <!-- ============================================== HOT DEALS ============================================== -->
         <?php include 'include/hotdeals.php' ?>
@@ -36,22 +35,6 @@
               <div class="clients_author">John Doe <span>Abc Company</span> </div>
               <!-- /.container-fluid -->
             </div>
-            <!-- /.item -->
-
-            <div class="item">
-              <div class="avatar"><img src="assets/images/testimonials/member3.png" alt="Image"></div>
-              <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer. Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat.<em>"</em></div>
-              <div class="clients_author">Stephen Doe <span>Xperia Designs</span> </div>
-            </div>
-            <!-- /.item -->
-
-            <div class="item">
-              <div class="avatar"><img src="assets/images/testimonials/member2.png" alt="Image"></div>
-              <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer. Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat.<em>"</em></div>
-              <div class="clients_author">Saraha Smith <span>Datsun &amp; Co</span> </div>
-              <!-- /.container-fluid -->
-            </div>
-            <!-- /.item -->
 
           </div>
           <!-- /.owl-carousel -->
@@ -123,49 +106,10 @@
                   <?php
                   $allproduct_res = mysql_qres("SELECT * FROM estore_product order by ID DESC limit 8");
                   while ($row = mysqli_fetch_assoc($allproduct_res)) {
-                    extract($row, EXTR_PREFIX_ALL, "all");
+                    extract($row, EXTR_PREFIX_ALL, "pro");
                   ?>
                     <div class="item item-carousel">
-                      <div class="products">
-                        <div class="product">
-                          <div class="product-image">
-                            <div class="image">
-                              <a href="product_single.php?id=<?php echo $all_ID; ?>">
-                                <img src="admin/assets/img/products/<?php echo $all_p_featured_img; ?>" alt="">
-                                <!-- <img src="assets/images/products/p1_hover.jpg" alt="" class="hover-image"> -->
-                              </a>
-                            </div>
-                            <!-- /.image -->
-
-                            <div class="tag new"><span>new</span></div>
-                          </div>
-                          <!-- /.product-image -->
-
-                          <div class="product-info text-left">
-                            <h3 class="name"><a href="product_single.php?id=<?php echo $all_ID; ?>"><?php echo $all_p_name ?></a></h3>
-                            <div class="rating rateit-small"></div>
-                            <div class="description"></div>
-                            <?php showprice($all_p_sale_price, $all_p_reg_price); ?>
-
-                          </div>
-                          <!-- /.product-info -->
-                          <div class="cart clearfix animate-effect">
-                            <div class="action">
-                              <ul class="list-unstyled">
-                                <li class="add-cart-button btn-group">
-                                  <a href="cart.php?id=<?php echo $all_ID; ?>"><button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button></a>
-                                  <a href="cart.php?id=<?php echo $all_ID; ?>"><button class="btn btn-primary cart-btn" type="button">Add to cart</button></a>
-                                </li>
-                              </ul>
-                            </div>
-                            <!-- /.action -->
-                          </div>
-                          <!-- /.cart -->
-                        </div>
-                        <!-- /.product -->
-
-                      </div>
-                      <!-- /.products -->
+                      <?php include 'include/product-card.php'?>
                     </div>
                     <!-- /.item -->
                   <?php
@@ -191,54 +135,11 @@
                     <?php
                     $allproduct_res = mysql_qres("SELECT * FROM estore_product");
                     while ($row = mysqli_fetch_assoc($allproduct_res)) {
-                      extract($row, EXTR_PREFIX_ALL, "specicat");
-                      if ($cat_ID == findval('is_parent', 'estore_category', 'ID', $specicat_p_category)) {
+                      extract($row, EXTR_PREFIX_ALL, "pro");
+                      if ($cat_ID == findval('is_parent', 'estore_category', 'ID', $pro_p_category)) {
                     ?>
                         <div class="item item-carousel">
-                          <div class="products">
-                            <div class="product">
-                              <div class="product-image">
-                                <div class="image">
-                                  <a href="product_single.php?id=<?php echo $specicat_ID; ?>">
-                                    <img src="admin/assets/img/products/<?php echo $specicat_p_featured_img; ?>" alt="">
-                                    <!-- <img src="assets/images/products/p7_hover.jpg" alt="" class="hover-image"> -->
-                                  </a>
-
-                                </div>
-                                <!-- /.image -->
-
-                                <div class="tag sale"><span>sale</span></div>
-                              </div>
-                              <!-- /.product-image -->
-
-                              <div class="product-info text-left">
-                                <h3 class="name"><a href="product_single.php?id=<?php echo $specicat_ID; ?>"><?php echo $specicat_p_name; ?></a></h3>
-                                <div class="rating rateit-small"></div>
-                                <div class="description"></div>
-                                <div class="product-price"> <span class="price"> <?php echo $specicat_p_sale_price ?> </span> <span class="price-before-discount"><?php $specicat_p_reg_price ?></span> </div>
-                                <!-- /.product-price -->
-
-                              </div>
-                              <!-- /.product-info -->
-                              <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                  <ul class="list-unstyled">
-                                    <li class="add-cart-button btn-group">
-                                      <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                                      <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                    </li>
-                                    <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                    <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
-                                  </ul>
-                                </div>
-                                <!-- /.action -->
-                              </div>
-                              <!-- /.cart -->
-                            </div>
-                            <!-- /.product -->
-
-                          </div>
-                          <!-- /.products -->
+                          <?php include 'include/product-card.php'?>
                         </div>
                     <?php
                       }
@@ -257,12 +158,6 @@
             <?php
             }
             ?>
-
-
-
-
-
-
           </div>
           <!-- /.tab-content -->
         </div>
@@ -295,48 +190,7 @@
                   extract($pro_row, EXTR_PREFIX_ALL, "pro");
                 ?>
                   <div class="item item-carousel">
-                    <div class="products">
-                      <div class="product">
-                        <div class="product-image">
-                          <div class="image">
-                            <a href="product_single.php?id=<?php echo $pro_ID?>">
-                              <img src="admin/assets/img/products/<?php echo $pro_p_featured_img;?>" alt="">
-                              <!-- <img src="assets/images/products/p13_hover.jpg" alt="" class="hover-image"> -->
-                            </a>
-
-                          </div>
-                          <!-- /.image -->
-
-                          <div class="tag hot"><span>hot</span></div>
-                        </div>
-                        <!-- /.product-image -->
-
-                        <div class="product-info text-left">
-                          <h3 class="name"><a href="product_single.php?id=<?php echo $pro_ID?>"><?php echo $pro_p_name;?></a></h3>
-                          <div class="product-price"> <span class="price"> <?php showprice($pro_p_sale_price,$pro_p_reg_price) ?> </span></div>
-                          <!-- /.product-price -->
-
-                        </div>
-                        <!-- /.product-info -->
-                        <div class="cart clearfix animate-effect">
-                          <div class="action">
-                            <ul class="list-unstyled">
-                              <li class="add-cart-button btn-group">
-                                <button onclick="location.href = 'cart.php?id=<?php echo $pro_ID; ?>';" class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                                <button onclick="location.href = 'cart.php?id=<?php echo $pro_ID; ?>';" class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                              </li>
-                              <!-- <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li> -->
-                              <!-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li> -->
-                            </ul>
-                          </div>
-                          <!-- /.action -->
-                        </div>
-                        <!-- /.cart -->
-                      </div>
-                      <!-- /.product -->
-
-                    </div>
-                    <!-- /.products -->
+                    <?php include 'include/product-card.php'?>
                   </div>
                   <!-- /.item -->
                 <?php
