@@ -146,6 +146,7 @@ if($is_cart_empty){
                         <input type="checkbox" name="cash_on_delivery" class="custom-control-input" id="same-address">
                         <input type="hidden" value="<?php echo $grand_grand_total?>" name="amount" id="total_amount" required />
                         <label class="custom-control-label" for="same-address">Cash on delivery</label>
+                        <span>(Delivery charge <b>100TK</b>)</span>
                     </div>
                     <hr class="mb-4">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>

@@ -10,6 +10,7 @@ if (isset($_POST['cash_on_delivery'])) {
     $email = isset($_POST['customer_email']) ? $_POST['customer_email'] : "john.doe@email.com";
     $phone = isset($_POST['customer_mobile']) ? $_POST['customer_mobile'] : "01711111111";
     $transaction_amount = $_POST['amount'];
+    $transaction_amount += 100;
     $address = $_POST['address'];
     $tran_id = "SSLCZ_TEST_" . uniqid();
     $currency = '';
@@ -67,6 +68,7 @@ if (isset($_POST['cash_on_delivery'])) {
 
 
     header("Location: cod_oder_success.php");
+    exit();
 }
 
 $user_id = $_POST['user_id'];
