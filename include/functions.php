@@ -109,3 +109,29 @@ function product_card()
     <!-- /.products -->
 <?php
 }
+
+
+function isUserLoggedIn() {
+    // Start session if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Check if session variables are set
+    if (isset($_SESSION['id'])) {
+        return true;
+    }
+
+    // Check if cookies are set
+    if (isset($_COOKIE['user_id']) && isset($_COOKIE['user_email']) && isset($_COOKIE['user_role'])) {
+        // Set session variables from cookies
+        $_SESSION['id'] = $_COOKIE['user_id'];
+        $_SESSION['email'] = $_COOKIE['user_email'];
+        $_SESSION['userrole'] = $_COOKIE['user_role'];
+        
+        return true;
+    }
+
+    // If neither session nor cookies are set
+    return false;
+}

@@ -3,12 +3,12 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-        <!-- <li class="nav-item">
-          <a class="nav-link " href="dashb">
+        <li class="nav-item">
+          <a class="nav-link " href="dashboard.php">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
-        </li>End Dashboard Nav -->
+        </li>
       <?php 
 
       if($_SESSION['userrole'] == 3){

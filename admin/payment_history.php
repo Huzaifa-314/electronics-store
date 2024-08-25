@@ -19,9 +19,9 @@
         ?>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card" style="width: fit-content; margin-right:40px;">
                         <div class="card-body">
-                            <h5 class="card-title">All Products</h5>
+                            <h5 class="card-title">All Payments</h5>
                             <table class="table datatable">
                                 <thead>
                                     <tr>

@@ -11,7 +11,31 @@
         <!-- ============================================== HOT DEALS ============================================== -->
         <?php include 'include/hotdeals.php' ?>
         <!-- ============================================== NEWSLETTER ============================================== -->
-        <div class="sidebar-widget newsletter outer-bottom-small">
+        <div class="sidebar-widget">
+          <h3 class="section-title">Best Sellers</h3>
+          <div class="sidebar-widget-body">
+            <div class="owl-carousel sidebar-carousel custom-carousel owl-theme">
+              <?php
+              $best_sellers = mysql_qres("SELECT p.* FROM estore_order_items oi JOIN estore_product p ON oi.product_id = p.ID GROUP BY oi.product_id ORDER BY SUM(oi.qty) DESC LIMIT 3;");
+              while ($row = mysqli_fetch_assoc($best_sellers)) {
+                extract($row, EXTR_PREFIX_ALL, "pro");
+              ?>
+                <div class="item">
+                  <div class="products">
+                    <?php include 'include/product-card.php' ?>
+                  </div>
+                </div>
+              <?php
+              }
+              ?>
+            </div>
+          </div>
+        </div>
+
+
+        
+        
+        <!-- <div class="sidebar-widget newsletter outer-bottom-small">
           <h3 class="section-title">Newsletters</h3>
           <div class="sidebar-widget-body outer-top-xs">
             <p>Sign Up for Our Newsletter!</p>
@@ -23,24 +47,23 @@
               <button class="btn btn-primary">Subscribe</button>
             </form>
           </div>
-          <!-- /.sidebar-widget-body -->
-        </div>
+        </div> -->
         <!-- /.sidebar-widget -->
         <!-- ============================================== Testimonials============================================== -->
-        <div class="sidebar-widget outer-top-vs ">
+        <!-- <div class="sidebar-widget outer-top-vs ">
           <div id="advertisement" class="advertisement">
             <div class="item">
               <div class="avatar"><img src="assets/images/testimonials/member1.png" alt="Image"></div>
               <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer. Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat.<em>"</em></div>
               <div class="clients_author">John Doe <span>Abc Company</span> </div>
-              <!-- /.container-fluid -->
             </div>
 
           </div>
-          <!-- /.owl-carousel -->
-        </div>
+        </div> -->
+        
 
       </div>
+      
       <!-- /.sidemenu-holder -->
 
       <!-- ============================================== CONTENT ============================================== -->
@@ -105,6 +128,7 @@
                 <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
                   <?php
                   $allproduct_res = mysql_qres("SELECT * FROM estore_product order by ID DESC limit 8");
+                  
                   while ($row = mysqli_fetch_assoc($allproduct_res)) {
                     extract($row, EXTR_PREFIX_ALL, "pro");
                   ?>
@@ -122,9 +146,11 @@
               <!-- /.product-slider -->
             </div>
             <!-- /.tab-pane -->
+            
 
             <?php
             $cat_res = mysql_qres("SELECT * FROM estore_category WHERE is_parent = '0'");
+            
             while ($row = mysqli_fetch_assoc($cat_res)) {
               extract($row, EXTR_PREFIX_ALL, "cat");
             ?>
@@ -133,16 +159,22 @@
                   <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
 
                     <?php
-                    $allproduct_res = mysql_qres("SELECT * FROM estore_product");
-                    while ($row = mysqli_fetch_assoc($allproduct_res)) {
+                    $tabproduct_sql = "SELECT p.* from estore_product as p inner join estore_category as c on p.p_category=c.ID where c.is_parent = $cat_ID";
+                    $tabproduct_res = mysql_qres($tabproduct_sql);
+                    if(mysqli_num_rows($tabproduct_res) == 0){
+                      ?>
+                        <div class="owl-wrapper-outer">
+                        <div style="display: flex;justify-content:center;align-items:center;"><span class="alert alert-danger text-danger">No Products Available</span></div>
+                        </div>
+                      <?php
+                    }
+                    while ($row = mysqli_fetch_assoc($tabproduct_res)) {
                       extract($row, EXTR_PREFIX_ALL, "pro");
-                      if ($cat_ID == findval('is_parent', 'estore_category', 'ID', $pro_p_category)) {
-                    ?>
+                      ?>
                         <div class="item item-carousel">
                           <?php include 'include/product-card.php'?>
                         </div>
-                    <?php
-                      }
+                      <?php
                     }
                     ?>
 

@@ -86,7 +86,7 @@
                 <div class="row">
                   <?php
                   $product_count = 0;
-                  if (isset($_GET['cat_id'])) {
+                  if (isset($_GET['cat_id']) && !isset($_GET['search'])) {
                     $category_id = $_GET['cat_id'];
                     $category_res = mysql_qres("SELECT * FROM estore_category where ID = $category_id; ");
                     $category_row = mysqli_fetch_assoc($category_res);
@@ -101,7 +101,7 @@
                         while ($pro_row = mysqli_fetch_assoc($pro_res)) {
                           $product_count++;
                           extract($pro_row, EXTR_PREFIX_ALL, "pro");
-                  ?>
+                          ?>
                           <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="item">
                               <?php include 'include/product-card.php'; ?>
@@ -127,13 +127,14 @@
                       <?php
                       }
                     }
-                  } else if (isset($_GET['search'])) {
+                  } 
+                  else if (isset($_GET['search'])) {
                     $search_term = mysqli_real_escape_string($db, $_GET['search']); // sanitize the search input
                     $cat_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0; // check if cat_id is set and convert to integer
 
                     // If both search and category are present
-                    if ($cat_id > 0) {
-                      $pro_res = mysql_qres("SELECT * FROM estore_product WHERE cat_id = $cat_id AND (p_name LIKE '%$search_term%' OR p_short_desc LIKE '%$search_term%')");
+                    if (isset($_GET['cat_id'])) {
+                      $pro_res = mysql_qres("SELECT p.* from estore_product as p inner join estore_category as c on p.p_category=c.ID where c.is_parent = $cat_id AND (p_name LIKE '%$search_term%' OR p_short_desc LIKE '%$search_term%')");
                     } else {
                       // Only search term is present
                       $pro_res = mysql_qres("SELECT * FROM estore_product WHERE p_name LIKE '%$search_term%' OR p_short_desc LIKE '%$search_term%'");

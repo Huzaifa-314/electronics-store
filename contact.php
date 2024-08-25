@@ -23,9 +23,9 @@
         </div>
         <div class="col-md-8 contact-form">
           <div class="col-md-12 contact-title">
-            <h4>Contact Form</h4>
+            <h4>Branches</h4>
           </div>
-          <div class="col-md-4 ">
+          <!-- <div class="col-md-4 ">
             <form class="register-form" role="form">
               <div class="form-group">
                 <label class="info-title" for="exampleInputName">Your Name <span>*</span></label>
@@ -48,18 +48,16 @@
                 <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
               </div>
             </form>
-          </div>
+          </div> -->
           <div class="col-md-12">
-            <form class="register-form" role="form">
-              <div class="form-group">
-                <label class="info-title" for="exampleInputComments">Your Comments <span>*</span></label>
-                <textarea class="form-control unicase-form-control" id="exampleInputComments"></textarea>
-              </div>
-            </form>
+            <ol>
+              <li><h3>Anik Plaza, Floor-12, Mirpur 12, Dhaka 1216</h3></li>
+              <li><h3>Rajlokkhi Complex, Floor-5, Shop-32</h3></li>
+            </ol>
           </div>
-          <div class="col-md-12 outer-bottom-small m-t-20">
+          <!-- <div class="col-md-12 outer-bottom-small m-t-20">
             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Send Message</button>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-4 contact-info">
           <div class="contact-title">

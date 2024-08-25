@@ -14,7 +14,7 @@ $main_category_id = findval('is_parent', 'estore_category', 'ID', $main_p_catego
 $main_category_name = findval('c_name', 'estore_category', 'ID', $main_category_id);
 $main_p_featured_image = findval('p_featured_img', 'estore_product', 'ID', $main_id);
 
-$is_out_of_stock = $main_p_quantity == 0;
+$is_out_of_stock = $main_p_quantity <= 0;
 ?>
 
 

@@ -30,7 +30,7 @@ $cart_link = "cart.php?id=$pro_ID";
                 <ul class="list-unstyled">
                     <li class="add-cart-button btn-group">
                         <button <?php echo $is_out_of_stock?"disabled":"" ?> onclick="location.href = '<?php echo $cart_link; ?>';" class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                        <button <?php echo $is_out_of_stock?"disabled":"" ?> onclick="location.href = '<?php echo $cart_link; ?>';" class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        <button <?php echo $is_out_of_stock?"disabled":"" ?> onclick="location.href = '<?php echo $cart_link; ?>';" class="btn btn-primary cart-btn" style="display:none;" type="button">Add to cart</button>
                     </li>
                 </ul>
             </div>

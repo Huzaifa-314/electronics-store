@@ -25,7 +25,7 @@ if (!$is_logged_in) {
         <div class="row ">
             <div class="shopping-cart">
                 <div class="shopping-cart-table ">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="overflow-x: scroll;">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -42,7 +42,7 @@ if (!$is_logged_in) {
 
                             <tbody>
                                 <?php
-                                $order_res = mysql_qres("select * from estore_orders where user_id = $user_id");
+                                $order_res = mysql_qres("select * from estore_orders where user_id = $user_id order by id desc");
                                 while ($order_row = mysqli_fetch_assoc($order_res)) {
                                     extract($order_row, EXTR_PREFIX_ALL, "order");
                                 ?>
@@ -58,7 +58,9 @@ if (!$is_logged_in) {
                                                 extract($order_product_row, EXTR_PREFIX_ALL, "order_product");
                                             ?>
                                                 <li class="cart-product-name-info">
-                                                    <h4 class='cart-product-description'><a href="product_single.php?id=<?php echo $order_product_product_id; ?>"><?php echo $order_product_p_name; ?></a></h4>
+                                                    <h4 class='cart-product-description'>
+                                                        <a style="font-weight: bold;" href="product_single.php?id=<?php echo $order_product_product_id; ?>"><?php echo $order_product_p_name; ?><span style="color: blue;"> (x<?php echo $order_product_qty ?>)</span></a>
+                                                    </h4>
                                                 </li>
                                             <?php
                                             }

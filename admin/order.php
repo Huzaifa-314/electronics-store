@@ -19,9 +19,9 @@
         ?>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card" style="width: fit-content; margin-right:40px;">
                         <div class="card-body">
-                            <h5 class="card-title">All Products</h5>
+                            <h5 class="card-title">All Orders</h5>
                             <table class="table datatable">
                                 <thead>
                                     <tr>
@@ -39,7 +39,7 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                $order_sql = "SELECT * FROM estore_orders";
+                                $order_sql = "SELECT * FROM estore_orders order by id desc";
                                 $order_res = mysqli_query($db, $order_sql);
                                 $serial = 0;
                                 while ($row = mysqli_fetch_assoc($order_res)) {
@@ -59,7 +59,10 @@
                                                     extract($order_product_row, EXTR_PREFIX_ALL, "order_product");
                                                 ?>
                                                     <li class="cart-product-name-info">
-                                                        <p class='cart-product-description'><a href="../product_single.php?id=<?php echo $order_product_product_id; ?>"><?php echo $order_product_p_name; ?></a></p>
+                                                        <p class='cart-product-description'>
+                                                            <a href="../product_single.php?id=<?php echo $order_product_product_id; ?>"><?php echo $order_product_p_name; ?></a>
+                                                            (x<?php echo $order_product_qty; ?>)
+                                                        </p>
                                                     </li>
                                                 <?php
                                                 }

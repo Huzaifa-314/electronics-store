@@ -37,7 +37,7 @@
                       
                       <div class="product-info text-left m-t-20">
                         <h3 class="name"><a href="product_single.php?id=<?php echo $hot_ID;?>"><?php echo $hot_p_name;?></a></h3>
-                        <div class="rating rateit-small"></div>
+                        <!-- <div class="rating rateit-small"></div> -->
                         <?php showprice($hot_p_sale_price,$hot_p_reg_price);?>
                         
                       </div>

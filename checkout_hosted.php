@@ -78,9 +78,6 @@ ini_set('display_errors', 1);
 
 require_once(__DIR__ . "/lib/SslCommerzNotification.php");
 
-include("include/connection.php");
-include("OrderTransaction.php");
-
 use SslCommerz\SslCommerzNotification;
 
 # Organize the submitted/inputted data

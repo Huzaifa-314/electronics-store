@@ -53,7 +53,7 @@ if (isset($_POST['sign-up'])) {
 if (isset($_POST['login'])) {
   $mail = $_POST['mail'];
   $password = sha1($_POST['password']);
-  // print_r($_POST);
+  $remember = isset($_POST['remember']); // Check if the checkbox is checked
 
   $user = mysqli_query($db, "SELECT email FROM estore_user WHERE email = '$mail' AND status='1'");
   $row = mysqli_fetch_assoc($user);
@@ -62,10 +62,22 @@ if (isset($_POST['login'])) {
   } else {
     $pass = mysqli_fetch_assoc(mysqli_query($db, "SELECT pass FROM estore_user WHERE email = '$mail'"))['pass'];
     if ($password == $pass) {
-      $row = mysqli_fetch_assoc(mysqli_query($db, "SELECT ID,email,userrole FROM estore_user WHERE email = '$mail'"));
-      $_SESSION['id']     = $row['ID'];
-      $_SESSION['email']     = $row['email'];
-      $_SESSION['userrole']   = $row['userrole'];
+      $row = mysqli_fetch_assoc(mysqli_query($db, "SELECT ID, email, userrole FROM estore_user WHERE email = '$mail'"));
+      $_SESSION['id'] = $row['ID'];
+      $_SESSION['email'] = $row['email'];
+      $_SESSION['userrole'] = $row['userrole'];
+
+      if ($remember) {
+        // Set cookies for 30 days
+        setcookie('user_id', $row['ID'], time() + (30 * 24 * 60 * 60), "/", "", false, true); // Secure flag and HTTP only
+        setcookie('user_email', $row['email'], time() + (30 * 24 * 60 * 60), "/", "", false, true);
+        setcookie('user_role', $row['userrole'], time() + (30 * 24 * 60 * 60), "/", "", false, true);
+      } else {
+        // Clear cookies if remember me is not checked
+        setcookie('user_id', '', time() - 3600, "/", "", false, true);
+        setcookie('user_email', '', time() - 3600, "/", "", false, true);
+        setcookie('user_role', '', time() - 3600, "/", "", false, true);
+      }
 
       header('Location: index.php?success=Logged In Successfully');
     } else {
@@ -73,6 +85,8 @@ if (isset($_POST['login'])) {
     }
   }
 }
+
+
 
 $error = isset($_GET['error']) ? '<span class="alert alert-danger text-danger">' . $_GET["error"] . '</span>' : '';
 ?>
@@ -96,24 +110,29 @@ $error = isset($_GET['error']) ? '<span class="alert alert-danger text-danger">'
       <div class="row">
 
         <!-- Sign-in -->
+        <!-- Sign-in -->
         <div class="col-md-6 col-sm-6 sign-in">
           <h4 class="">Sign in</h4>
           <form class="register-form outer-top-xs" role="form" method="post">
             <div class="form-group">
               <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-              <input type="email" name="mail" class="form-control unicase-form-control text-input" id="exampleInputEmail1">
+              <input type="email" name="mail" class="form-control unicase-form-control text-input" id="exampleInputEmail1" value="<?php echo isset($_COOKIE['user_email']) ? htmlspecialchars($_COOKIE['user_email']) : ''; ?>">
             </div>
             <div class="form-group">
               <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
               <input type="password" name="password" class="form-control unicase-form-control text-input" id="exampleInputPassword1">
             </div>
-            <!-- <div class="radio outer-xs">
-              <a href="#" class="forgot-password pull-right">Forgot your Password?</a>
-            </div> -->
+            <div class="form-group">
+              <input class="form-check-input" type="checkbox" name="remember" id="rememberMe" <?php echo isset($_COOKIE['user_email']) ? 'checked' : ''; ?>>
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
             <button type="submit" name="login" class="btn-upper btn btn-primary checkout-page-button">Login</button>
           </form>
         </div>
         <!-- Sign-in -->
+
+        <!-- Sign-in -->
+
 
         <!-- create a new account -->
         <div class="col-md-6 col-sm-6 create-new-account">

@@ -4,8 +4,10 @@ include 'functions.php';
 ob_start();
 session_start();
 $is_logged_in = false;
-if (isset($_SESSION['id'])) {
-  $user_id = $_SESSION['id'];
+if (isUserLoggedIn()) {
+  if(isset($_SESSION['id'])) $user_id = $_SESSION['id'];
+  else $user_id = $_COOKIE['user_id'];
+
   $is_logged_in = true;
 }
 ?>
@@ -128,7 +130,7 @@ if (isset($_SESSION['id'])) {
                     </li>
                   </ul>
                   <input type="hidden" name="cat_id" id="selected-cat-id" value="" />
-                  <input style="outline:none;" class="search-field" name="search" placeholder="Search here..." />
+                  <input style="outline:none;" class="search-field" name="search" value="<?php echo isset($_GET['search'])?$_GET['search']:""?>" placeholder="Search here..." />
                   <button type="submit" style="border:none" class="search-button"></button>
                 </div>
               </form>

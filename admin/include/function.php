@@ -8,6 +8,13 @@ function mysql_qres($sql){
     return $res;
 }
 
+function mysql_qrow($sql)
+{
+    global $db;
+    $res = mysqli_query($db, $sql);
+    $row = $res ? mysqli_fetch_assoc($res) : NULL;
+    return $row;
+}
 
 //find sub category
 function show_sub_category($cat_id){
@@ -171,4 +178,9 @@ function is_admin($userrole){
     }
 }
 
+
+
 ?>
+
+
+
